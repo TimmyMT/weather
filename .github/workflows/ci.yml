@@ -1,0 +1,43 @@
+name: CI
+on: [push, pull_request]
+
+env:
+  BUNDLER_VERSION: 2.3.11
+  RAILS_ENV: test
+  RUBY_VERSION: 2.7.4
+
+jobs:
+  initialization:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.4
+          bundler-cache: true
+
+  rspec:
+    needs:
+      - initialization
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ci_node_total: [1]
+        ci_node_index: [0]
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.4
+          bundler-cache: true
+
+      - name: Rspec
+        run: |
+          bundle exec rspec spec/app
