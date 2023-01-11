@@ -1,21 +1,21 @@
 [
   {
     "LocalObservationDateTime": "2023-01-11T11:48:00+00:00",
-    "EpochTime":1673437680,
-    "WeatherText":"Cloudy",
-    "WeatherIcon":7,
-    "HasPrecipitation":false,
+    "EpochTime": 1673437680,
+    "WeatherText": "Cloudy",
+    "WeatherIcon": 7,
+    "HasPrecipitation": false,
     "PrecipitationType": null,
-    "IsDayTime":true,
+    "IsDayTime": true,
     "Temperature": {
       "Metric": {
-        "Value":7.0, "Unit":"C", "UnitType":17
+        "Value": 7.0, "Unit":"C", "UnitType":17
       },
       "Imperial": {
-        "Value":45.0, "Unit":"F", "UnitType":18
+        "Value": 45.0, "Unit":"F", "UnitType":18
       }
     },
     "MobileLink": "http://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us",
-    "Link":"http://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us"
+    "Link": "http://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us"
   }
 ]

@@ -3,36 +3,42 @@ module Weather
     class CurrentConditions < Weather::API
       resources :weather do
         get '/current' do
-          result = AccuWeather.current_temperature
+          last_current_condition = CurrentCondition.order(local_observation_date_time: :asc).last
 
-          result.first["Temperature"]
+          last_current_condition.content['Temperature']
         end
 
-        get '/historical' do
-          AccuWeather.day_conditions
-        end
+        namespace do
+          before do
+            @collection = CurrentCondition.order(local_observation_date_time: :asc).last(24)
+          end
 
-        get '/historical/max' do
-          AccuWeather.temperature_by_day('max')
-        end
-
-        get '/historical/min' do
-          AccuWeather.temperature_by_day('min')
-        end
-
-        get '/historical/avg' do
-          AccuWeather.temperature_by_day('avg')
+          get '/historical' do
+            @collection.pluck(:content).pluck('LocalObservationDateTime', 'Temperature')
+          end
+  
+          get '/historical/max' do
+            Calculations::TemperatureByDay.new(@collection, 'max').call
+          end
+  
+          get '/historical/min' do
+            Calculations::TemperatureByDay.new(@collection, 'min').call
+          end
+  
+          get '/historical/avg' do
+            Calculations::TemperatureByDay.new(@collection, 'avg').call
+          end
         end
 
         params { requires :epoch_time, type: Integer }
         get '/by_time' do
-          result = AccuWeather.temperature_by_time(params[:epoch_time])
+          current_condition = CurrentCondition.find_by(epoch_time: params[:epoch_time])
 
-          if !result.empty?
-            result.first["Temperature"]
+          if current_condition.present?
+            current_condition.content['Temperature']
           else
             status :not_found
-            { error: "Conditions not found" }
+            { error: 'Conditions not found' }
           end
         end
       end
