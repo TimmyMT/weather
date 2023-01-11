@@ -106,4 +106,35 @@ RSpec.describe WeatherController, type: :request do
       )
     end
   end
+
+  describe 'GET #by_time' do
+    before do
+      get '/weather/by_time', { epoch_time: epoch_time }
+    end
+
+    context 'when condition exist' do
+      let(:epoch_time) { 1673387880 }
+
+      it 'return status Ok' do
+        expect(last_response.status).to eq 200
+      end
+  
+      it 'return expected data' do
+        expect(json).to eq(
+          {
+            "Metric"=>{"Value"=>10, "Unit"=>"C", "UnitType"=>17},
+            "Imperial"=>{"Value"=>50, "Unit"=>"F", "UnitType"=>18}
+          }
+        )
+      end
+    end
+
+    context 'when condition not exist' do
+      let(:epoch_time) { 1673387777 }
+
+      it 'return status Not Found' do
+        expect(last_response.status).to eq 404
+      end
+    end 
+  end
 end

@@ -18,6 +18,7 @@ gem 'puma', '~> 4.1'
 gem "net-http"
 gem 'rest-client'
 
+gem 'uri', '0.10.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
