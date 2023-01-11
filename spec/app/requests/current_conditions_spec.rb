@@ -2,7 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe WeatherController, type: :request do
+RSpec.describe 'CurrentConditions', type: :request do
+  let(:base_url) { "/api/v1/weather" }
   let(:context_url) { 'currentconditions/v1/329260/historical/24' }
   let(:body) { File.open('spec/support/files/historical.json') }
 
@@ -15,7 +16,7 @@ RSpec.describe WeatherController, type: :request do
     let(:body) { File.open('spec/support/files/current.json').read }
 
     before do
-      get '/weather/current'
+      get "#{base_url}/current"
     end
 
     it 'return status OK' do
@@ -29,7 +30,7 @@ RSpec.describe WeatherController, type: :request do
 
   describe 'GET #historical' do
     before do
-      get '/weather/historical'
+      get "#{base_url}/historical"
     end
 
     it 'return status OK' do
@@ -52,7 +53,7 @@ RSpec.describe WeatherController, type: :request do
 
   describe 'GET #max' do
     before do
-      get '/weather/historical/max'
+      get "#{base_url}/historical/max"
     end
 
     it 'return status OK' do
@@ -71,7 +72,7 @@ RSpec.describe WeatherController, type: :request do
 
   describe 'GET #min' do
     before do
-      get '/weather/historical/min'
+      get "#{base_url}/historical/min"
     end
 
     it 'return status OK' do
@@ -90,7 +91,7 @@ RSpec.describe WeatherController, type: :request do
 
   describe 'GET #avg' do
     before do
-      get '/weather/historical/avg'
+      get "#{base_url}/historical/avg"
     end
 
     it 'return status OK' do
@@ -109,7 +110,7 @@ RSpec.describe WeatherController, type: :request do
 
   describe 'GET #by_time' do
     before do
-      get '/weather/by_time', { epoch_time: epoch_time }
+      get "#{base_url}/by_time", { epoch_time: epoch_time }
     end
 
     context 'when condition exist' do
