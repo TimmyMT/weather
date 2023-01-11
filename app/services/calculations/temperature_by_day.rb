@@ -15,23 +15,7 @@ class Calculations::TemperatureByDay
     @i_unit = content.pluck('Temperature').pluck('Imperial').first['Unit']
   end
 
-  def call#(collection, setting)
-    # result = collection.pluck(:content)
-
-    # met_val = result.pluck('Temperature').pluck('Metric').pluck('Value')
-    # imp_val = result.pluck('Temperature').pluck('Imperial').pluck('Value')
-
-    # metric = {
-    #   'Value' => setting == 'avg' ? (met_val.sum / met_val.size).round(2) : eval("#{met_val}.#{setting}"),
-    #   'Unit' => 'C',
-    #   'UnitType' => result.pluck('Temperature').pluck('Metric').first['UnitType']
-    # }
-    # imperial = {
-    #   'Value' => setting == 'avg' ? (imp_val.sum / imp_val.size).round(2) : eval("#{imp_val}.#{setting}"),
-    #   'Unit' => 'C',
-    #   'UnitType' => result.pluck('Temperature').pluck('Imperial').first['UnitType']
-    # }
-
+  def call
     {
       'Metric' => make_data(@metric_value, @m_unit_type, @m_unit),
       'Imperial' => make_data(@imperial_value, @i_unit_type, @i_unit)
