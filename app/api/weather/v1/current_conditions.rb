@@ -31,7 +31,7 @@ module Weather
           if !result.empty?
             result.first["Temperature"]
           else
-            status 404
+            status :not_found
             { error: "Conditions not found" }
           end
         end
