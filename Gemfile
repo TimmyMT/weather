@@ -11,6 +11,8 @@ gem 'grape_on_rails_routes'
 gem "net-http"
 gem 'rest-client'
 gem 'uri', '0.10.0'
+gem 'whenever', require: false
+gem 'dotenv-rails'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do

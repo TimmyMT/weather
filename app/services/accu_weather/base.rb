@@ -5,7 +5,7 @@ class AccuWeather::Base
   private
 
   def self.client_req(url)
-    result = RestClient.get "#{url}?apikey=#{Rails.application.credentials.api_key}"
+    result = RestClient.get "#{url}?apikey=#{ENV['API_KEY']}"
     JSON.parse(result)
   end
 
