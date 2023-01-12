@@ -5,6 +5,10 @@ env:
   BUNDLER_VERSION: 2.3.11
   RAILS_ENV: test
   RUBY_VERSION: 2.7.4
+  PGUSER: postgres
+  PGPASSWORD: password
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
 
 jobs:
   initialization:
@@ -19,6 +23,9 @@ jobs:
           ruby-version: 2.7.4
           bundler-cache: true
 
+      - name: Copy database config file
+        run: cp config/database.yml.ci config/database.yml
+
   rspec:
     needs:
       - initialization
@@ -28,6 +35,15 @@ jobs:
       matrix:
         ci_node_total: [1]
         ci_node_index: [0]
+    services:
+      postgresql:
+        image: postgres:11
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: weather_api
+          POSTGRES_PASSWORD: password
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
@@ -40,4 +56,6 @@ jobs:
 
       - name: Rspec
         run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:prepare
           bundle exec rspec spec/app
