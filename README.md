@@ -1,4 +1,4 @@
-# README
+# WEATHER_API
 
 ## Run tests
 ```
