@@ -25,8 +25,8 @@ RAILS_ENV=test rails rswag
 
 ## Stack
 * Rails 6
-* Grape
-* Whenever (Schedule tasks)
-* RSpec
-* Webmock (Mocking Web Requests)
-* Rswag (API documentation)
+* [Grape](https://github.com/ruby-grape/grape)
+* [Whenever](https://github.com/javan/whenever) (Schedule tasks)
+* [RSpec](https://github.com/rspec/rspec-rails)
+* [Webmock](https://github.com/bblimke/webmock) (Mocking Web Requests)
+* [Rswag](https://github.com/rswag/rswag) (API documentation)
