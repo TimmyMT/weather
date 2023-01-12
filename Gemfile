@@ -10,11 +10,13 @@ gem 'grape'
 gem 'grape_on_rails_routes'
 gem "net-http"
 gem 'rest-client'
+gem 'uri', '0.10.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
+  gem 'rubocop'
 end
 
 group :development do
@@ -25,7 +27,10 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem "webmock"
+  gem 'timecop'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

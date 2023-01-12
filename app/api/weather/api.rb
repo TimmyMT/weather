@@ -5,5 +5,6 @@ module Weather
     version 'v1'
 
     mount Weather::V1::CurrentConditions
+    mount Weather::V1::Health
   end
 end
