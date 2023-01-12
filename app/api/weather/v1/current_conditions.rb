@@ -10,24 +10,24 @@ module Weather
           last_current_condition.content['Temperature']
         end
 
-        namespace do
+        namespace '/historical' do
           before do
             @collection = CurrentCondition.order(local_observation_date_time: :asc).last(24)
           end
 
-          get '/historical' do
+          get '/' do
             @collection
           end
   
-          get '/historical/max' do
+          get '/max' do
             Calculations::TemperatureByDay.new(@collection, 'max').call
           end
   
-          get '/historical/min' do
+          get '/min' do
             Calculations::TemperatureByDay.new(@collection, 'min').call
           end
   
-          get '/historical/avg' do
+          get '/avg' do
             Calculations::TemperatureByDay.new(@collection, 'avg').call
           end
         end
