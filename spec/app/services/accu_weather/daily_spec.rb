@@ -37,7 +37,7 @@ RSpec.describe AccuWeather::Daily do
 
     before { service.call }
 
-    it '24 times creates CurrentCondition' do
+    it '22 times creates CurrentCondition' do
       expect(CurrentCondition.count).to eq 24
     end
 
