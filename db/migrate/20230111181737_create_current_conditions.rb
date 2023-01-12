@@ -4,6 +4,7 @@ class CreateCurrentConditions < ActiveRecord::Migration[6.0]
       t.integer :epoch_time, null: false
       t.datetime :local_observation_date_time
       t.jsonb :content, null: false, default: {}
+      t.datetime :expires
 
       t.timestamps
     end

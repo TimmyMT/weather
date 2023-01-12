@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe AccuWeather::Current do
-  let(:service) { AccuWeather::Current }
-  let(:base_url) { "/api/v1/weather" }
+  let(:service) { described_class }
   let(:context_url) { 'currentconditions/v1/329260' }
   let(:body) { File.open('spec/support/files/current.json') }
+  let(:frozen_time) { Time.zone.parse("2023-01-11T11:48:00+00:00") }
 
   before do
+    Timecop.travel(frozen_time)
     mock_request(context_url, body)
   end
 
@@ -26,7 +27,8 @@ RSpec.describe AccuWeather::Current do
     let!(:current_condition) do
       create :current_condition,
       epoch_time: 1673437680,
-      local_observation_date_time: Time.zone.parse("2023-01-11T11:48:00+00:00")
+      local_observation_date_time: frozen_time,
+      expires: frozen_time
     end
 
     before { service.call }
@@ -44,7 +46,8 @@ RSpec.describe AccuWeather::Current do
     let!(:current_condition) do
       create :current_condition,
       epoch_time: 1673437679,
-      local_observation_date_time: Time.zone.parse("2023-01-11T11:48:00+00:00") - 1.hour
+      local_observation_date_time: frozen_time - 1.hour,
+      expires: frozen_time - 1.hour
     end
 
     before { service.call }

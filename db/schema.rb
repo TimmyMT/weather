@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2023_01_11_181737) do
     t.integer "epoch_time", null: false
     t.datetime "local_observation_date_time"
     t.jsonb "content", default: {}, null: false
+    t.datetime "expires"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
