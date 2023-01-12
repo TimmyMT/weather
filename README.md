@@ -1,5 +1,11 @@
 # WEATHER_API
 
+## Docker
+```
+docker-compose build
+docker-compose up
+```
+
 ## Set environment variables
 Add API_KEY value from [Accu Weather](https://developer.accuweather.com/) into .env file
 ```
