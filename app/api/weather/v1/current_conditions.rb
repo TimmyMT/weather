@@ -1,6 +1,8 @@
 module Weather
   module V1
     class CurrentConditions < Weather::API
+      formatter :json, Grape::Formatter::ActiveModelSerializers
+
       resources :weather do
         get '/current' do
           last_current_condition = CurrentCondition.order(local_observation_date_time: :asc).last
@@ -14,7 +16,7 @@ module Weather
           end
 
           get '/historical' do
-            @collection.pluck(:content).pluck('LocalObservationDateTime', 'Temperature')
+            @collection
           end
   
           get '/historical/max' do
@@ -32,10 +34,10 @@ module Weather
 
         params { requires :epoch_time, type: Integer }
         get '/by_time' do
-          current_condition = CurrentCondition.find_by(epoch_time: params[:epoch_time])
+          condition = CurrentCondition.find_by(epoch_time: params[:epoch_time])
 
-          if current_condition.present?
-            current_condition.content['Temperature']
+          if condition.present?
+            condition
           else
             status :not_found
             { error: 'Conditions not found' }

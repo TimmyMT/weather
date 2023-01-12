@@ -13,6 +13,9 @@ gem 'rest-client'
 gem 'uri', '0.10.0'
 gem 'whenever', require: false
 gem 'dotenv-rails'
+gem 'rswag'
+gem 'active_model_serializers'
+gem 'grape-active_model_serializers'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do

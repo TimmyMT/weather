@@ -1,0 +1,156 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/weather/current":
+    get:
+      summary: returns current condition
+      tags:
+      - Current Conditions
+      operationId: fetchCurrentCondition
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Metric:
+                    type: object
+                    properties:
+                      Value:
+                        type: number
+                      Unit:
+                        type: string
+                      UnitType:
+                        type: integer
+                  Imperial:
+                    type: object
+                    properties:
+                      Value:
+                        type: number
+                      Unit:
+                        type: string
+                      UnitType:
+                        type: integer
+  "/api/v1/weather/historical":
+    get:
+      summary: retrun conditions by last 24 hours
+      tags:
+      - Current Conditions
+      operationId: fetchDayConditions
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/current_condition"
+  "/api/v1/weather/historical/max":
+    get:
+      summary: returns current condition with max value
+      tags:
+      - Current Conditions
+      operationId: fetchConditionMaxValue
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/temperature"
+  "/api/v1/weather/historical/min":
+    get:
+      summary: returns current condition with min value
+      tags:
+      - Current Conditions
+      operationId: fetchConditionMinValue
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/temperature"
+  "/api/v1/weather/historical/avg":
+    get:
+      summary: returns current condition with avg value
+      tags:
+      - Current Conditions
+      operationId: fetchConditionAvgValue
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/temperature"
+  "/api/v1/weather/by_time":
+    get:
+      summary: returns current condition by epoch_time
+      tags:
+      - Current Conditions
+      operationId: fetchConditionByTime
+      parameters:
+      - name: epoch_time
+        in: query
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/current_condition"
+        '404':
+          description: No content
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    error: Conditions not found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  schemas:
+    current_condition:
+      type: object
+      properties:
+        local_observation_date_time:
+          type: string
+          format: date-time
+        temperature:
+          "$ref": "#components/schemas/temperature"
+    temperature:
+      type: object
+      properties:
+        Metric:
+          type: object
+          properties:
+            Value:
+              type: number
+            Unit:
+              type: string
+            UnitType:
+              type: integer
+        Imperial:
+          type: object
+          properties:
+            Value:
+              type: number
+            Unit:
+              type: string
+            UnitType:
+              type: integer

@@ -1,5 +1,11 @@
 # WEATHER_API
 
+## Set environment variables
+Add API_KEY value from [Accu Weather](https://developer.accuweather.com/) into .env file
+```
+cp .env.example .env
+```
+
 ## Run tests
 ```
 bundle exec rspec spec/app

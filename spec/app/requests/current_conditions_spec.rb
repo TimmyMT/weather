@@ -61,8 +61,8 @@ RSpec.describe 'CurrentConditions', type: :request do
       expect(json.count).to eq 24
     end
 
-    it 'return expected data' do 
-      expect(json.last.second).to eq(
+    it 'return expected data' do
+      expect(json.last['temperature']).to eq(
         {
           'Metric' => { 'Value' => 7, 'Unit' => 'C', 'UnitType' => 17 }
         }
@@ -160,7 +160,7 @@ RSpec.describe 'CurrentConditions', type: :request do
       end
   
       it 'return expected data' do
-        expect(json).to eq(
+        expect(json['temperature']).to eq(
           {
             "Metric"=>{"Value"=>10, "Unit"=>"C", "UnitType"=>17},
             "Imperial"=>{"Value"=>50, "Unit"=>"F", "UnitType"=>18}
