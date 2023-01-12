@@ -22,3 +22,11 @@ whenever --update-crontab --set environment=development
 ```
 RAILS_ENV=test rails rswag
 ```
+
+## Stack
+* Rails 6
+* Grape
+* Whenever (Schedule tasks)
+* RSpec
+* Webmock (Mocking Web Requests)
+* Rswag (API documentation)
