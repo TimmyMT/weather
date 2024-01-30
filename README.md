@@ -32,7 +32,7 @@ RAILS_ENV=test rails rswag
 ## Stack
 * Rails 6
 * [Grape](https://github.com/ruby-grape/grape)
-* [Whenever](https://github.com/javan/whenever) (Schedule tasks)
+* [Rufus](https://github.com/jmettraux/rufus-scheduler) (Schedule tasks)
 * [RSpec](https://github.com/rspec/rspec-rails)
-* [Webmock](https://github.com/bblimke/webmock) (Mocking Web Requests)
+* [VCR](https://github.com/vcr/vcr) (Mocking Web Requests)
 * [Rswag](https://github.com/rswag/rswag) (API documentation)
