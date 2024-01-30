@@ -31,7 +31,42 @@ RSpec.configure do |config|
             }
           }
         }
-      ]
+      ],
+      components: {
+        schemas: {
+          current_condition: {
+            type: :object,
+            properties: {
+              local_observation_date_time: { type: :string, format: 'date-time', nullable: true },
+              temperature: {
+                '$ref' => '#components/schemas/temperature'
+              }
+            }
+          },
+          temperature: {
+            type: :object,
+            properties: {
+              "Metric" => {
+                type: :object,
+                properties: {
+                  "Value" => { type: 'number' },
+                  "Unit" => { type: 'string' },
+                  "UnitType" => { type: 'integer' }
+                }
+              },
+              "Imperial" => {
+                type: :object,
+                properties: {
+                  "Value" => { type: 'number' },
+                  "Unit" => { type: 'string' },
+                  "UnitType" => { type: 'integer' }
+                }
+              }
+            },
+            nullable: true
+          }
+        }
+      }
     }
   }
 

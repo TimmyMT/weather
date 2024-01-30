@@ -13,6 +13,11 @@ paths:
       responses:
         '200':
           description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#/components/schemas/current_condition"
   "/api/v1/weather/historical":
     get:
       summary: retrun conditions by last 24 hours
@@ -22,6 +27,12 @@ paths:
       responses:
         '200':
           description: Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/current_condition"
   "/api/v1/weather/historical/max":
     get:
       summary: returns current condition with max value
@@ -31,6 +42,11 @@ paths:
       responses:
         '200':
           description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/temperature"
   "/api/v1/weather/historical/min":
     get:
       summary: returns current condition with min value
@@ -40,6 +56,11 @@ paths:
       responses:
         '200':
           description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/temperature"
   "/api/v1/weather/historical/avg":
     get:
       summary: returns current condition with avg value
@@ -49,6 +70,11 @@ paths:
       responses:
         '200':
           description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/temperature"
   "/api/v1/weather/by_time":
     get:
       summary: returns current condition by epoch_time
@@ -61,6 +87,11 @@ paths:
       responses:
         '200':
           description: Found
+          content:
+            application/json:
+              schema:
+                type: object
+                "$ref": "#components/schemas/current_condition"
         '404':
           description: Not Found
   "/api/v1/health":
@@ -76,3 +107,36 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+components:
+  schemas:
+    current_condition:
+      type: object
+      properties:
+        local_observation_date_time:
+          type: string
+          format: date-time
+          nullable: true
+        temperature:
+          "$ref": "#components/schemas/temperature"
+    temperature:
+      type: object
+      properties:
+        Metric:
+          type: object
+          properties:
+            Value:
+              type: number
+            Unit:
+              type: string
+            UnitType:
+              type: integer
+        Imperial:
+          type: object
+          properties:
+            Value:
+              type: number
+            Unit:
+              type: string
+            UnitType:
+              type: integer
+      nullable: true

@@ -20,6 +20,8 @@ describe 'current conditions API' do
       end
 
       response '200', 'Found' do
+        schema type: :object, '$ref' => '#/components/schemas/current_condition'
+
         run_test! do
           expected_data = json['temperature']['Metric']
 
@@ -54,6 +56,10 @@ describe 'current conditions API' do
       end
 
       response '200', 'Found' do
+        schema type: :array, items: {
+          '$ref' => '#/components/schemas/current_condition'
+        }
+
         run_test! 'return 24 items' do
           expect(json.count).to eq 24
         end
@@ -88,6 +94,8 @@ describe 'current conditions API' do
         produces 'application/json'
 
         response '200', 'Found' do
+          schema type: :object, '$ref' => '#components/schemas/temperature'
+
           run_test! 'return expected data' do
             expect(json).to eq(
               {
@@ -107,6 +115,8 @@ describe 'current conditions API' do
         produces 'application/json'
 
         response '200', 'Found' do
+          schema type: :object, '$ref' => '#components/schemas/temperature'
+
           run_test! 'return expected data' do
             expect(json).to eq(
               {
@@ -126,6 +136,8 @@ describe 'current conditions API' do
         produces 'application/json'
 
         response '200', 'Found' do
+          schema type: :object, '$ref' => '#components/schemas/temperature'
+
           run_test! 'return expected data' do
             expect(json).to eq(
               {
@@ -158,6 +170,7 @@ describe 'current conditions API' do
         end
 
         response '200', 'Found' do
+          schema type: :object, '$ref' => '#components/schemas/current_condition'
           let(:epoch_time) { 1_673_387_880 }
 
           run_test! 'return expected data' do
