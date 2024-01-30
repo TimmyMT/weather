@@ -1,0 +1,78 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/weather/current":
+    get:
+      summary: returns current condition
+      tags:
+      - Current Conditions
+      operationId: fetchCurrentCondition
+      responses:
+        '200':
+          description: Found
+  "/api/v1/weather/historical":
+    get:
+      summary: retrun conditions by last 24 hours
+      tags:
+      - Current Conditions
+      operationId: fetchDayConditions
+      responses:
+        '200':
+          description: Found
+  "/api/v1/weather/historical/max":
+    get:
+      summary: returns current condition with max value
+      tags:
+      - Current Conditions
+      operationId: fetchConditionMaxValue
+      responses:
+        '200':
+          description: Found
+  "/api/v1/weather/historical/min":
+    get:
+      summary: returns current condition with min value
+      tags:
+      - Current Conditions
+      operationId: fetchConditionMinValue
+      responses:
+        '200':
+          description: Found
+  "/api/v1/weather/historical/avg":
+    get:
+      summary: returns current condition with avg value
+      tags:
+      - Current Conditions
+      operationId: fetchConditionAvgValue
+      responses:
+        '200':
+          description: Found
+  "/api/v1/weather/by_time":
+    get:
+      summary: returns current condition by epoch_time
+      tags:
+      - Current Conditions
+      operationId: fetchConditionByTime
+      parameters:
+      - name: epoch_time
+        in: query
+      responses:
+        '200':
+          description: Found
+        '404':
+          description: Not Found
+  "/api/v1/health":
+    get:
+      summary: Fetch status server
+      tags:
+      - Health
+      responses:
+        '200':
+          description: Success
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

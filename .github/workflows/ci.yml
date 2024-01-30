@@ -1,0 +1,75 @@
+name: CI
+on: [push, pull_request]
+
+env:
+  BUNDLER_VERSION: 2.3.11
+  RAILS_ENV: test
+  RUBY_VERSION: 3.1.4
+  PGUSER: postgres
+  PGPASSWORD: password
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
+
+jobs:
+  initialization:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.4
+          bundler-cache: true
+
+      - name: Copy database config file
+        run: cp config/database.yml.ci config/database.yml
+
+  rubocop:
+    needs:
+      - initialization
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.4
+          bundler-cache: true
+      - name: Rubocop
+        run: |
+          bundle exec rubocop
+
+  rspec:
+    needs:
+      - initialization
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+    services:
+      postgresql:
+        image: postgres:11
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: weather
+          POSTGRES_PASSWORD: password
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.4
+          bundler-cache: true
+
+      - name: Rspec
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:prepare
+          bundle exec rspec spec

@@ -1,0 +1,2 @@
+class CurrentCondition < ApplicationRecord
+end
