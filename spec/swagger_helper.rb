@@ -46,20 +46,20 @@ RSpec.configure do |config|
           temperature: {
             type: :object,
             properties: {
-              "Metric" => {
+              'Metric' => {
                 type: :object,
                 properties: {
-                  "Value" => { type: 'number' },
-                  "Unit" => { type: 'string' },
-                  "UnitType" => { type: 'integer' }
+                  'Value' => { type: 'number' },
+                  'Unit' => { type: 'string' },
+                  'UnitType' => { type: 'integer' }
                 }
               },
-              "Imperial" => {
+              'Imperial' => {
                 type: :object,
                 properties: {
-                  "Value" => { type: 'number' },
-                  "Unit" => { type: 'string' },
-                  "UnitType" => { type: 'integer' }
+                  'Value' => { type: 'number' },
+                  'Unit' => { type: 'string' },
+                  'UnitType' => { type: 'integer' }
                 }
               }
             },
