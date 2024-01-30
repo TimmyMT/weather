@@ -18,8 +18,8 @@ gem 'net-http'
 gem 'rest-client'
 gem 'rswag'
 gem 'rubocop'
+gem 'rufus-scheduler'
 gem 'uri', '0.10.0'
-gem 'whenever', require: false
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
