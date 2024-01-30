@@ -32,7 +32,7 @@ module Calculations
 
     def make_data(value, unit_type, unit)
       {
-        'Value' => setting == 'avg' ? (value.sum / value.size).round(2) : eval("#{value}.#{setting}"),
+        'Value' => setting == 'avg' ? (value.sum / value.size).round(2) : (setting == 'min' ? value.min : value.max),
         'Unit' => unit,
         'UnitType' => unit_type
       }
