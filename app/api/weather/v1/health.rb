@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Weather
   module V1
     class Health < Weather::Base

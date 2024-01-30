@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Weather
   module V1
     class CurrentConditions < Weather::Base
@@ -16,15 +18,15 @@ module Weather
           get '/' do
             @collection
           end
-  
+
           get '/max' do
             Calculations::TemperatureByDay.new(@collection, 'max').call
           end
-  
+
           get '/min' do
             Calculations::TemperatureByDay.new(@collection, 'min').call
           end
-  
+
           get '/avg' do
             Calculations::TemperatureByDay.new(@collection, 'avg').call
           end

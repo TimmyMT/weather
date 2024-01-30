@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Weather
   class Base < Grape::API
     format :json

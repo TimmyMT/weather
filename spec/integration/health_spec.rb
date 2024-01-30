@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 describe 'Health API' do
@@ -8,7 +10,7 @@ describe 'Health API' do
 
       response '200', 'Success' do
         run_test! do
-          expect(JSON.parse(response.body)).to eq({"success" => "Server is running"})
+          expect(JSON.parse(response.body)).to eq({ 'success' => 'Server is running' })
         end
       end
     end

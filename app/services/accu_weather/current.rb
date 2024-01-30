@@ -1,25 +1,27 @@
-class AccuWeather::Current < AccuWeather::Base
-  def self.call
-    url = "#{API_URL}/currentconditions/v1/#{LOCATION_KEY}"
-    result = client_req(url)
-    
-    return if condition_exist?(result.first)
-    return unless current_condition_expires?
+# frozen_string_literal: true
 
-    CurrentCondition.create(
-      epoch_time: result.first['EpochTime'],
-      local_observation_date_time: Time.zone.parse(result.first['LocalObservationDateTime']),
-      content: result.first,
-      expires: Time.zone.parse(result.first['LocalObservationDateTime']) + 1.hour
-    )
-  end
+module AccuWeather
+  class Current < AccuWeather::Base
+    def self.call
+      url = "#{API_URL}/currentconditions/v1/#{LOCATION_KEY}"
+      result = client_req(url)
 
-  private
+      return if condition_exist?(result.first)
+      return unless current_condition_expires?
 
-  def self.current_condition_expires?
-    last = CurrentCondition.order(local_observation_date_time: :asc).last
-    return true if last.nil?
-    
-    last.expires < Time.current
+      CurrentCondition.create(
+        epoch_time: result.first['EpochTime'],
+        local_observation_date_time: Time.zone.parse(result.first['LocalObservationDateTime']),
+        content: result.first,
+        expires: Time.zone.parse(result.first['LocalObservationDateTime']) + 1.hour
+      )
+    end
+
+    def self.current_condition_expires?
+      last = CurrentCondition.order(local_observation_date_time: :asc).last
+      return true if last.nil?
+
+      last.expires < Time.current
+    end
   end
 end
