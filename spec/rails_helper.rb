@@ -11,7 +11,13 @@ require 'rspec/rails'
 
 # Webmock settings
 require 'webmock/rspec'
-WebMock.disable_net_connect!(allow_localhost: true)
+# WebMock.disable_net_connect!(allow_localhost: true)
+
+require 'vcr'
+VCR.configure do |config|
+  config.cassette_library_dir = Rails.root.join('spec', 'support', 'vcr')
+  config.hook_into :webmock
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

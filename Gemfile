@@ -35,9 +35,11 @@ group :development do
 end
 
 group :test do
+  gem 'climate_control'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'timecop'
+  gem 'vcr'
   gem 'webmock'
 end
 

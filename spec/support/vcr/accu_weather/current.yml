@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dataservice.accuweather.com/currentconditions/v1/329260?apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin22 x86_64) ruby/3.1.4p223
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - dataservice.accuweather.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 30 Jan 2024 14:30:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '[{"LocalObservationDateTime":"2024-01-30T14:17:00+00:00","EpochTime":1706624220,"WeatherText":"Mostly
+        sunny","WeatherIcon":2,"HasPrecipitation":false,"PrecipitationType":null,"IsDayTime":true,"Temperature":{"Metric":{"Value":7.5,"Unit":"C","UnitType":17},"Imperial":{"Value":46.0,"Unit":"F","UnitType":18}},"MobileLink":"http://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us","Link":"http://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us"}]'
+  recorded_at: Tue, 30 Jan 2024 14:30:35 GMT
+recorded_with: VCR 6.2.0
