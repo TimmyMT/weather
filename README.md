@@ -14,7 +14,7 @@ cp .env.example .env
 
 ## Run tests
 ```
-bundle exec rspec spec/app
+bundle exec rspec spec
 ```
 
 ## Set scheduled tasks
