@@ -17,13 +17,6 @@ cp .env.example .env
 bundle exec rspec spec
 ```
 
-## Set scheduled tasks
-```
-whenever --update-crontab
-whenever --update-crontab --set environment=production
-whenever --update-crontab --set environment=development
-```
-
 ## Actualize swagger schema
 ```
 RAILS_ENV=test rails rswag
